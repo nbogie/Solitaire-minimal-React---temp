@@ -1,7 +1,8 @@
 export type Column = Card[];
-export type Rank = number;
 export const allSuits = ["d", "c", "s", "h"] as const;
 export type Suit = typeof allSuits[number];
+export const allRanks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] as const;
+export type Rank = typeof allRanks[number];
 
 export interface Card {
     rank: Rank;
@@ -10,13 +11,13 @@ export interface Card {
 }
 export type SuitColour = "black" | "red"
 
-export function isKing(card: Card) {
+export function isKing(card: Card): boolean {
     return card.rank === 13;
 }
-export function makeDeck() {
+export function makeDeck(): Card[] {
     const deck = [];
     for (let suit of allSuits) {
-        for (let rank = 1; rank <= 13; rank++) {
+        for (let rank of allRanks) {
             const card: Card = {
                 rank,
                 suit,
@@ -25,9 +26,13 @@ export function makeDeck() {
             deck.push(card);
         }
     }
-    deck.sort((a, b) => (Math.random() > 0.5 ? -1 : 1));
-    return deck;
+    return shuffle(deck);
 }
+
+export function shuffle<T>(arr: T[]): T[] {
+    return [...arr].sort(() => (Math.random() > 0.5 ? -1 : 1));
+}
+
 export function suitFullName(suit: Suit): string {
     const lookup: Record<Suit, string> = { d: 'Diamonds', c: 'Clubs', s: 'Spades', h: 'Hearts' };
     return lookup[suit];
@@ -39,6 +44,15 @@ export function otherSuitColour(suit: Suit): SuitColour {
     return suitColour(suit) === 'red' ? 'black' : 'red';
 }
 
+export function emojiForSuit(suit: Suit): string {
+    const lookup: Record<Suit, string> = {
+        c: "♣️",
+        d: "♦️",
+        s: "♠️",
+        h: "♥️"
+    };
+    return lookup[suit];
+}
 export function suitColour(suit: Suit): SuitColour {
     const lookup: Record<Suit, SuitColour> = { d: 'red', h: 'red', s: 'black', c: 'black' };
     return lookup[suit];
