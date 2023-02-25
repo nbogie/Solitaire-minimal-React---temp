@@ -1,12 +1,10 @@
-import { greet } from "./greet";
-import { MyComponent } from "./MyComponent";
+import Solitaire from "./Solitaire";
+import "./style.css"
 
 function App() {
   return (
     <div className="App">
-      <MyComponent />
-
-      {greet("scholar")}
+      <Solitaire />
     </div>
   );
 }
