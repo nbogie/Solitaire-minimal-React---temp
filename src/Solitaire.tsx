@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-    Card, cardToString, Column, differentColourSuits, higherRank, isKing, makeColumns, otherSuitColour, Rank, rankToCharacter,
+    Card, cardToString, Column, differentColourSuits, emojiForSuit, higherRank, isKing, makeColumns, otherSuitColour, Rank, rankToCharacter,
     rankToWord, Suit, suitFullName
 } from './deck';
 
@@ -162,7 +162,7 @@ function CardView(props: {
                             s
                         )}`}
                     >
-                        {rankToCharacter(r)} of {s}
+                        {rankToCharacter(r)} {emojiForSuit(s)}
                     </div>
                 }
             </div>
