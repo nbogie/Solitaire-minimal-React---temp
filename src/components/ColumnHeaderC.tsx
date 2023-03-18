@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { useDrop } from "react-dnd";
-import { Card, isKing } from "../gameCore/card";
-import { Column } from "../gameCore/deck";
+import { Card } from "../gameCore/card";
+import { canMoveCardsToTopOfColumn, Column } from "../gameCore/deck";
 import { Action } from "../reducer/action";
 
 interface ColumnHeaderCProps {
@@ -19,8 +19,7 @@ export function ColumnHeaderC({
     const [, dropRef] = useDrop({
         accept: "card",
         canDrop: (item: Card) => {
-            // return gs.selectedCard && isKing(gs.selectedCard);
-            return true;
+            return canMoveCardsToTopOfColumn(item, col);
         },
         drop: (item: Card) => {
             dispatch({

@@ -1,4 +1,4 @@
-import { Card, allSuits, allRanks } from "./card";
+import { Card, allSuits, allRanks, isKing } from "./card";
 
 export type Column = Card[];
 
@@ -38,4 +38,11 @@ export function makeColumns() {
 
 function flipLastCard(cards: Card[]) {
     cards[cards.length - 1].isFaceup = true;
+}
+
+export function canMoveCardsToTopOfColumn(
+    cardOnTop: Card,
+    col: Column
+): boolean {
+    return col.length === 0 && isKing(cardOnTop);
 }
