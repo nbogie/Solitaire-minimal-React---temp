@@ -27,7 +27,17 @@ export function immerReducerFunction(gs: GameState, action: Action) {
             throw new Error("not implemented: reset-game");
 
         default:
-            const x: never = action;
-            return;
+            //alternatively:
+            // const _exhaustiveCheck: never = action;
+            throw new UnreachableCodeError(
+                action,
+                "Unexpected action: " + JSON.stringify(action)
+            );
+    }
+}
+
+class UnreachableCodeError extends Error {
+    constructor(myNever: never, message: string) {
+        super(message);
     }
 }

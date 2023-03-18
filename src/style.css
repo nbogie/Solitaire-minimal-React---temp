@@ -34,11 +34,18 @@ input {
     display: grid;
     place-items: center;
     user-select: none;
+    background: rgb(246, 246, 241);
 }
 
 .card.faceDown {
     /* https://www.magicpattern.design/tools/css-backgrounds */
-    background: repeating-linear-gradient(-45deg, #afb3ff, #afb3ff 3px, #e5e5f7 3px, #e5e5f7 10px);
+    background: repeating-linear-gradient(
+        -45deg,
+        #afb3ff,
+        #afb3ff 3px,
+        #e5e5f7 3px,
+        #e5e5f7 10px
+    );
 }
 
 .d,

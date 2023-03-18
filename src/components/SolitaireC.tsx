@@ -3,8 +3,9 @@ import { Card, isKing } from "../gameCore/card";
 import { createInitialGameState } from "../gameCore/gameState";
 import { immerReducerFunction } from "../reducer/immerReducerFunction";
 import { CardC } from "./CardC";
+import { ColumnHeaderC } from "./ColumnHeaderC";
 
-function Solitaire() {
+function SolitaireC() {
     const [gs, dispatch] = useImmerReducer(
         immerReducerFunction,
         createInitialGameState()
@@ -41,15 +42,12 @@ function Solitaire() {
             <div className="cardTable">
                 {gs.columns.map((col, ix) => (
                     <div className="column" key={ix}>
-                        <div
-                            onClick={
-                                col.length === 0
-                                    ? () => handleClickedEmptyColumn(ix)
-                                    : () => {}
-                            }
-                        >
-                            Column:
-                        </div>
+                        <ColumnHeaderC
+                            col={col}
+                            ix={ix}
+                            handleClickedEmptyColumn={handleClickedEmptyColumn}
+                            dispatch={dispatch}
+                        />
                         {col.map((card, ixc) => (
                             <CardC
                                 card={card}
@@ -94,4 +92,4 @@ function Solitaire() {
     );
 }
 
-export default Solitaire;
+export default SolitaireC;

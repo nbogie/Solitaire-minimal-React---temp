@@ -1,3 +1,4 @@
+import { isKing } from "../gameCore/card";
 import { GameState } from "../gameCore/gameState";
 import { MoveCardsToEmptyColumnAction } from "./action";
 import { removeCardsIncludingAndUnder } from "./removeCardsIncludingAndUnder";
@@ -6,8 +7,11 @@ export function doMoveCardsToEmptyColumn(
     gs: GameState,
     action: MoveCardsToEmptyColumnAction
 ) {
-    const removed = removeCardsIncludingAndUnder(gs, action.topCard);
     const col = gs.columns[action.columnIx];
-    col.push(...removed);
+    if (col.length > 0 || !isKing(action.topCard)) {
+        return;
+    }
+    const cardsBeingMoved = removeCardsIncludingAndUnder(gs, action.topCard);
+    col.push(...cardsBeingMoved);
     gs.selectedCard = null;
 }
