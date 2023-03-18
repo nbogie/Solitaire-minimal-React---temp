@@ -7,6 +7,7 @@ export function makeDeck(): Card[] {
     for (let suit of allSuits) {
         for (let rank of allRanks) {
             const card: Card = {
+                id: rank + "_" + suit,
                 rank,
                 suit,
                 isFaceup: false,

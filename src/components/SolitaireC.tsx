@@ -1,91 +1,50 @@
-import { useState } from "react";
-import { Card, cardToString, canPlaceOn, isKing } from "../gameCore/card";
-import { Column, makeColumns } from "../gameCore/deck";
+import { useImmerReducer } from "use-immer";
+import { Card, isKing } from "../gameCore/card";
+import { createInitialGameState } from "../gameCore/gameState";
+import { immerReducerFunction } from "../reducer/immerReducerFunction";
 import { CardC } from "./CardC";
 
 function Solitaire() {
-    const [logMessages, setLogMessages] = useState<string[]>([]);
-    const [selectedCard, setSelectedCard] = useState<Card | null>(null);
-
-    const addMessage = (m: string) => {
-        setLogMessages([...logMessages, m]);
-    };
-    function removeCardsFrom(c: Card) {
-        const column = columns.find((cl) => cl.includes(c))!;
-        const ix = column.findIndex((a) => a === c);
-        if (ix === -1) {
-            throw new Error("can't find card in column");
-        }
-        const removed = column.splice(ix);
-
-        setColumns([...columns]);
-        return removed;
-    }
-    function tryToPlaceOn(baseCard: Card, nextCard: Card) {
-        if (baseCard === nextCard) {
-            addMessage("Can't place on self!");
-            setSelectedCard(null);
-            return;
-        }
-        const columnEndingWithBaseCard = columns.find(
-            (col) => col[col.length - 1] === baseCard
-        );
-
-        if (!columnEndingWithBaseCard) {
-            addMessage(
-                "Can't place on non-end card: " + cardToString(baseCard)
-            );
-            setSelectedCard(null);
-            return;
-        }
-
-        if (canPlaceOn(baseCard, nextCard)) {
-            const removed = removeCardsFrom(nextCard);
-            columnEndingWithBaseCard.push(...removed);
-            setColumns([...columns]);
-            setSelectedCard(null);
-        } else {
-            addMessage(
-                `Can't place ${cardToString(nextCard)} on ${cardToString(
-                    baseCard
-                )}`
-            );
-            setSelectedCard(null);
-        }
-    }
+    const [gs, dispatch] = useImmerReducer(
+        immerReducerFunction,
+        createInitialGameState()
+    );
 
     function handleClickedCard(card: Card) {
-        if (selectedCard) {
-            tryToPlaceOn(card, selectedCard);
+        if (gs.selectedCard) {
+            dispatch({
+                name: "move-cards",
+                destCard: card,
+                topCard: gs.selectedCard,
+            });
         } else {
-            setSelectedCard(card);
+            dispatch({ name: "select-card", card });
         }
     }
     function handleClickedFaceDownCard(card: Card) {
-        card.isFaceup = true;
-        setColumns([...columns]);
+        dispatch({ name: "reveal-card", card });
     }
 
-    function handleClickedEmptyColumn(col: Column) {
-        if (selectedCard && isKing(selectedCard)) {
-            const removed = removeCardsFrom(selectedCard);
-            col.push(...removed);
-            setColumns([...columns]);
-            setSelectedCard(null);
+    function handleClickedEmptyColumn(colIx: number) {
+        if (gs.selectedCard && isKing(gs.selectedCard)) {
+            dispatch({
+                name: "move-cards-to-empty-column",
+                topCard: gs.selectedCard,
+                columnIx: colIx,
+            });
         }
     }
-    const [columns, setColumns] = useState<Column[]>(makeColumns());
 
     return (
         <div>
             <h1>Klondike / Solitaire (React prototype)</h1>
             <div className="cardTable">
-                {columns.map((col, ix) => (
+                {gs.columns.map((col, ix) => (
                     <div className="column" key={ix}>
                         <div
                             onClick={
                                 col.length === 0
-                                    ? () => handleClickedEmptyColumn(col)
+                                    ? () => handleClickedEmptyColumn(ix)
                                     : () => {}
                             }
                         >
@@ -99,24 +58,28 @@ function Solitaire() {
                                 handleClickedFaceDownCard={() => {
                                     if (ixc === col.length - 1) {
                                         handleClickedFaceDownCard(card);
-                                    } else {
-                                        addMessage("not last card");
                                     }
                                 }}
+                                dispatch={dispatch}
                             />
                         ))}
                     </div>
                 ))}
                 <div>
-                    {selectedCard && (
+                    {gs.selectedCard && (
                         <div>
                             Selected card:{" "}
                             <CardC
-                                card={selectedCard}
+                                card={gs.selectedCard}
                                 handleClickedCard={() => {}}
                                 handleClickedFaceDownCard={() => {}}
+                                dispatch={dispatch}
                             />
-                            <button onClick={() => setSelectedCard(null)}>
+                            <button
+                                onClick={() =>
+                                    dispatch({ name: "clear-selected-card" })
+                                }
+                            >
                                 cancel
                             </button>
                         </div>
@@ -124,8 +87,8 @@ function Solitaire() {
                 </div>
             </div>
             <h3>Messages:</h3>
-            {[...logMessages].reverse().map((m) => (
-                <p>{m}</p>
+            {[...gs.logMessages].reverse().map((m, ix) => (
+                <p key={ix}>{m}</p>
             ))}
         </div>
     );

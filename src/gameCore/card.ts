@@ -5,6 +5,7 @@ export type Rank = (typeof allRanks)[number];
 export type SuitColour = "black" | "red";
 
 export interface Card {
+    id: string;
     rank: Rank;
     suit: Suit;
     isFaceup: boolean;

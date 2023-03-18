@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import { ConnectableElement, useDrag, useDrop } from "react-dnd";
 import {
     canPlaceOn,
@@ -11,20 +12,27 @@ import {
     Suit,
     suitFullName,
 } from "../gameCore/card";
+import { Action } from "../reducer/action";
 
 interface CardCProps {
     card: Card;
     handleClickedCard: (card: Card) => void;
     handleClickedFaceDownCard: (card: Card) => void;
+    dispatch: Dispatch<Action>;
 }
 
-export function CardC(props: CardCProps) {
-    const r = props.card.rank;
-    const s = props.card.suit;
+export function CardC({
+    card,
+    handleClickedCard,
+    handleClickedFaceDownCard,
+    dispatch,
+}: CardCProps) {
+    const r = card.rank;
+    const s = card.suit;
 
     const [{ myProp }, dragRef] = useDrag({
         type: "card",
-        item: props.card,
+        item: card,
         collect: (monitor) => ({
             myProp: monitor.isDragging(),
         }),
@@ -33,10 +41,14 @@ export function CardC(props: CardCProps) {
     const [, dropRef] = useDrop({
         accept: "card",
         canDrop: (item: Card) => {
-            return canPlaceOn(props.card, item);
+            return canPlaceOn(card, item);
         },
         drop: (item: Card) => {
-            console.log("dropped", item);
+            dispatch({
+                name: "move-cards",
+                destCard: card,
+                topCard: item,
+            });
         },
     });
 
@@ -53,12 +65,12 @@ export function CardC(props: CardCProps) {
             return "Can be placed under an empty column.";
         }
     }
-    if (props.card.isFaceup) {
+    if (card.isFaceup) {
         return (
             <div
                 ref={attachRef}
                 className={"card " + s}
-                onClick={() => props.handleClickedCard(props.card)}
+                onClick={() => handleClickedCard(card)}
             >
                 {
                     <div
@@ -76,7 +88,7 @@ export function CardC(props: CardCProps) {
             <div
                 className="card faceDown"
                 onClick={() => {
-                    props.handleClickedFaceDownCard(props.card);
+                    handleClickedFaceDownCard(card);
                 }}
             ></div>
         );
