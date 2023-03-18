@@ -3,7 +3,7 @@ import { Card, isKing } from "../gameCore/card";
 import { createInitialGameState } from "../gameCore/gameState";
 import { immerReducerFunction } from "../reducer/immerReducerFunction";
 import { CardC } from "./CardC";
-import { ColumnHeaderC } from "./ColumnHeaderC";
+import { ColumnC } from "./ColumnC";
 
 function SolitaireC() {
     const [gs, dispatch] = useImmerReducer(
@@ -41,29 +41,16 @@ function SolitaireC() {
             <h1>Klondike / Solitaire (React prototype)</h1>
             <div className="cardTable">
                 {gs.columns.map((col, ix) => (
-                    <div className="column" key={ix}>
-                        <ColumnHeaderC
-                            col={col}
-                            ix={ix}
-                            handleClickedEmptyColumn={handleClickedEmptyColumn}
-                            dispatch={dispatch}
-                        />
-                        <div className="cardList">
-                            {col.map((card, ixc) => (
-                                <CardC
-                                    card={card}
-                                    key={ixc}
-                                    handleClickedCard={handleClickedCard}
-                                    handleClickedFaceDownCard={() => {
-                                        if (ixc === col.length - 1) {
-                                            handleClickedFaceDownCard(card);
-                                        }
-                                    }}
-                                    dispatch={dispatch}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    <ColumnC
+                        {...{
+                            col,
+                            ix,
+                            dispatch,
+                            handleClickedCard,
+                            handleClickedEmptyColumn,
+                            handleClickedFaceDownCard,
+                        }}
+                    />
                 ))}
                 <div>
                     {gs.selectedCard && (
