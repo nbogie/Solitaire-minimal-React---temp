@@ -38,7 +38,7 @@ function SolitaireC() {
 
     return (
         <div>
-            <h1>Klondike / Solitaire (React prototype)</h1>
+            <h1>Patience / Klondike / Solitaire (React)</h1>
             <div className="cardTable">
                 {gs.columns.map((col, ix) => (
                     <ColumnC
