@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { CardView } from './CardView';
+import { useState } from "react";
+import { CardC } from "./CardC";
 import {
-    Card, cardToString, Column, differentColourSuits, isKing, makeColumns
-} from './deck';
+    Card,
+    cardToString,
+    Column,
+    differentColourSuits,
+    isKing,
+    makeColumns,
+} from "../gameCore/deck";
 
 function canPlaceOn(baseCard: Card, nextCard: Card) {
     return (
@@ -19,8 +24,8 @@ function Solitaire() {
         setLogMessages([...logMessages, m]);
     };
     function removeCardsFrom(c: Card) {
-        const column = columns.find(cl => cl.includes(c))!;
-        const ix = column.findIndex(a => a === c);
+        const column = columns.find((cl) => cl.includes(c))!;
+        const ix = column.findIndex((a) => a === c);
         if (ix === -1) {
             throw new Error("can't find card in column");
         }
@@ -36,11 +41,13 @@ function Solitaire() {
             return;
         }
         const columnEndingWithBaseCard = columns.find(
-            col => col[col.length - 1] === baseCard
+            (col) => col[col.length - 1] === baseCard
         );
 
         if (!columnEndingWithBaseCard) {
-            addMessage("Can't place on non-end card: " + cardToString(baseCard));
+            addMessage(
+                "Can't place on non-end card: " + cardToString(baseCard)
+            );
             setSelectedCard(null);
             return;
         }
@@ -52,7 +59,9 @@ function Solitaire() {
             setSelectedCard(null);
         } else {
             addMessage(
-                `Can't place ${cardToString(nextCard)} on ${cardToString(baseCard)}`
+                `Can't place ${cardToString(nextCard)} on ${cardToString(
+                    baseCard
+                )}`
             );
             setSelectedCard(null);
         }
@@ -90,13 +99,13 @@ function Solitaire() {
                             onClick={
                                 col.length === 0
                                     ? () => handleClickedEmptyColumn(col)
-                                    : () => { }
+                                    : () => {}
                             }
                         >
                             Column:
                         </div>
                         {col.map((card, ixc) => (
-                            <CardView
+                            <CardC
                                 card={card}
                                 key={ixc}
                                 handleClickedCard={handleClickedCard}
@@ -104,7 +113,7 @@ function Solitaire() {
                                     if (ixc === col.length - 1) {
                                         handleClickedFaceDownCard(card);
                                     } else {
-                                        addMessage('not last card');
+                                        addMessage("not last card");
                                     }
                                 }}
                             />
@@ -114,18 +123,21 @@ function Solitaire() {
                 <div>
                     {selectedCard && (
                         <div>
-                            Selected card: <CardView
+                            Selected card:{" "}
+                            <CardC
                                 card={selectedCard}
-                                handleClickedCard={() => { }}
-                                handleClickedFaceDownCard={() => { }}
+                                handleClickedCard={() => {}}
+                                handleClickedFaceDownCard={() => {}}
                             />
-                            <button onClick={() => setSelectedCard(null)}>cancel</button>
+                            <button onClick={() => setSelectedCard(null)}>
+                                cancel
+                            </button>
                         </div>
                     )}
                 </div>
             </div>
             <h3>Messages:</h3>
-            {[...logMessages].reverse().map(m => (
+            {[...logMessages].reverse().map((m) => (
                 <p>{m}</p>
             ))}
         </div>
