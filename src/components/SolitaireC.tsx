@@ -48,19 +48,21 @@ function SolitaireC() {
                             handleClickedEmptyColumn={handleClickedEmptyColumn}
                             dispatch={dispatch}
                         />
-                        {col.map((card, ixc) => (
-                            <CardC
-                                card={card}
-                                key={ixc}
-                                handleClickedCard={handleClickedCard}
-                                handleClickedFaceDownCard={() => {
-                                    if (ixc === col.length - 1) {
-                                        handleClickedFaceDownCard(card);
-                                    }
-                                }}
-                                dispatch={dispatch}
-                            />
-                        ))}
+                        <div className="cardList">
+                            {col.map((card, ixc) => (
+                                <CardC
+                                    card={card}
+                                    key={ixc}
+                                    handleClickedCard={handleClickedCard}
+                                    handleClickedFaceDownCard={() => {
+                                        if (ixc === col.length - 1) {
+                                            handleClickedFaceDownCard(card);
+                                        }
+                                    }}
+                                    dispatch={dispatch}
+                                />
+                            ))}
+                        </div>
                     </div>
                 ))}
                 <div>

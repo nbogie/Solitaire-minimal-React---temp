@@ -22,6 +22,11 @@ input {
     flex-direction: column;
 }
 
+.cardList {
+    display: flex;
+    flex-direction: column;
+}
+
 .card {
     border: 2px solid black;
     padding: 0.25rem;
@@ -30,12 +35,19 @@ input {
     border-radius: 0.3rem;
     aspect-ratio: 2/3;
     /* drop shadow for playing card */
-    box-shadow: 0 0 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0rem 0.05rem 0.05rem rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     user-select: none;
     background: rgb(246, 246, 241);
+}
+
+.card:not(:first-child) {
+    /* Overlap cards, see https://fireship.io/lessons/css-cards-animated/ */
+    margin-top: -3rem;
+    /* the first card doesn't get this look, it sits more flat on table */
+    box-shadow: 0 -0.06rem 0.08rem 0.08rem rgba(0, 0, 0, 0.3);
 }
 
 .card.faceDown {
