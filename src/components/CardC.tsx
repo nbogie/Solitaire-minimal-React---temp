@@ -30,11 +30,11 @@ export function CardC({
     const r = card.rank;
     const s = card.suit;
 
-    const [{ myProp }, dragRef] = useDrag({
+    const [, dragRef] = useDrag({
         type: "card",
         item: card,
         collect: (monitor) => ({
-            myProp: monitor.isDragging(),
+            // myProp: monitor.isDragging(),
         }),
     });
 
@@ -52,10 +52,6 @@ export function CardC({
         },
     });
 
-    function attachRef(element: ConnectableElement) {
-        dragRef(element);
-        dropRef(element);
-    }
     function placementAdvice(r: Rank, s: Suit) {
         const higher = higherRank(r);
         const colour = otherSuitColour(s);
@@ -65,6 +61,11 @@ export function CardC({
             return "Can be placed under an empty column.";
         }
     }
+    function attachRef(element: ConnectableElement) {
+        dragRef(element);
+        dropRef(element);
+    }
+
     if (card.isFaceup) {
         return (
             <div
