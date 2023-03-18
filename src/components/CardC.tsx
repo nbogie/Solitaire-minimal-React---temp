@@ -1,4 +1,6 @@
+import { ConnectableElement, useDrag, useDrop } from "react-dnd";
 import {
+    canPlaceOn,
     Card,
     emojiForSuit,
     higherRank,
@@ -8,16 +10,40 @@ import {
     rankToWord,
     Suit,
     suitFullName,
-} from "../gameCore/deck";
+} from "../gameCore/card";
 
-export function CardC(props: {
+interface CardCProps {
     card: Card;
     handleClickedCard: (card: Card) => void;
     handleClickedFaceDownCard: (card: Card) => void;
-}) {
+}
+
+export function CardC(props: CardCProps) {
     const r = props.card.rank;
     const s = props.card.suit;
 
+    const [{ myProp }, dragRef] = useDrag({
+        type: "card",
+        item: props.card,
+        collect: (monitor) => ({
+            myProp: monitor.isDragging(),
+        }),
+    });
+
+    const [, dropRef] = useDrop({
+        accept: "card",
+        canDrop: (item: Card) => {
+            return canPlaceOn(props.card, item);
+        },
+        drop: (item: Card) => {
+            console.log("dropped", item);
+        },
+    });
+
+    function attachRef(element: ConnectableElement) {
+        dragRef(element);
+        dropRef(element);
+    }
     function placementAdvice(r: Rank, s: Suit) {
         const higher = higherRank(r);
         const colour = otherSuitColour(s);
@@ -30,6 +56,7 @@ export function CardC(props: {
     if (props.card.isFaceup) {
         return (
             <div
+                ref={attachRef}
                 className={"card " + s}
                 onClick={() => props.handleClickedCard(props.card)}
             >

@@ -1,20 +1,7 @@
 import { useState } from "react";
+import { Card, cardToString, canPlaceOn, isKing } from "../gameCore/card";
+import { Column, makeColumns } from "../gameCore/deck";
 import { CardC } from "./CardC";
-import {
-    Card,
-    cardToString,
-    Column,
-    differentColourSuits,
-    isKing,
-    makeColumns,
-} from "../gameCore/deck";
-
-function canPlaceOn(baseCard: Card, nextCard: Card) {
-    return (
-        baseCard.rank === nextCard.rank + 1 &&
-        differentColourSuits(baseCard.suit, nextCard.suit)
-    );
-}
 
 function Solitaire() {
     const [logMessages, setLogMessages] = useState<string[]>([]);
