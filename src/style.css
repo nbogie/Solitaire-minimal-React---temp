@@ -1,19 +1,18 @@
-h1,
-p {
-    font-family: Lato;
-}
-
 body {
     padding: 20px;
 }
 
-input {
-    margin-left: 10px;
+h1 {
+    text-align: center;
 }
-
+.App {
+    max-width: 800px;
+    margin: 0 auto;
+}
 .cardTable {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .column {
@@ -27,11 +26,13 @@ input {
     flex-direction: column;
 }
 
-.card {
+.card,
+.cardPlaceholder {
     border: 2px solid black;
+    background: rgb(246, 246, 241);
     padding: 0.25rem;
-    min-height: 30px;
-    min-width: 30px;
+    min-height: 4rem;
+    min-width: 2rem;
     border-radius: 0.3rem;
     aspect-ratio: 2/3;
     box-shadow: 0 0rem 0.05rem 0.05rem rgba(0, 0, 0, 0.3);
@@ -39,7 +40,11 @@ input {
     flex-direction: column;
     justify-content: flex-start;
     user-select: none;
-    background: rgb(246, 246, 241);
+}
+.cardPlaceholder {
+    border: 3px dashed #afb3ff;
+    background: none;
+    box-shadow: none;
 }
 
 .card:not(:first-child) {
@@ -49,18 +54,6 @@ input {
     box-shadow: 0 -0.03rem 0.08rem 0.08rem rgba(0, 0, 0, 0.3);
 }
 
-.cardPlaceholder {
-    border: 3px dashed #afb3ff;
-    padding: 0.25rem;
-    min-height: 30px;
-    min-width: 30px;
-    border-radius: 0.3rem;
-    aspect-ratio: 2/3;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    user-select: none;
-}
 .card.faceDown {
     /* https://www.magicpattern.design/tools/css-backgrounds */
     background: repeating-linear-gradient(

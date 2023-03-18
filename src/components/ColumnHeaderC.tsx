@@ -38,7 +38,6 @@ export function ColumnHeaderC({
                 col.length === 0 ? () => handleClickedEmptyColumn(ix) : () => {}
             }
         >
-            Column:
             {col.length === 0 ? <PlaceholderC /> : null}
         </div>
     );
