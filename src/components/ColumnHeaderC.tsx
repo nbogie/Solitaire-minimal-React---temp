@@ -39,6 +39,11 @@ export function ColumnHeaderC({
             }
         >
             Column:
+            {col.length === 0 ? <PlaceholderC /> : null}
         </div>
     );
+}
+
+function PlaceholderC() {
+    return <div className="cardPlaceholder"></div>;
 }
