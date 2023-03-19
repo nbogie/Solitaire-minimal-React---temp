@@ -22,7 +22,13 @@ function SolitaireC() {
             <h1>Patience / Klondike / Solitaire (React)</h1>
             <div className="cardTable">
                 <div className="drawAndDiscardPiles">
-                    <DrawPileC drawPile={gs.drawPile} dispatch={dispatch} />
+                    <DrawPileC
+                        drawPile={gs.drawPile}
+                        dispatch={dispatch}
+                        numDrawPilePassesRemaining={
+                            gs.numDrawPilePassesRemaining
+                        }
+                    />
                     <DiscardPileC
                         discardPile={gs.discardPile}
                         dispatch={dispatch}

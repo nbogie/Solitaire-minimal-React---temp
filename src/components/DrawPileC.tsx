@@ -6,8 +6,13 @@ import { PlaceholderC } from "./PlaceholderC";
 interface DrawPileCProps {
     dispatch: Dispatch<Action>;
     drawPile: Card[];
+    numDrawPilePassesRemaining: number;
 }
-export function DrawPileC({ dispatch, drawPile }: DrawPileCProps): JSX.Element {
+export function DrawPileC({
+    dispatch,
+    drawPile,
+    numDrawPilePassesRemaining,
+}: DrawPileCProps): JSX.Element {
     return (
         <div
             className="drawPile"
@@ -16,7 +21,7 @@ export function DrawPileC({ dispatch, drawPile }: DrawPileCProps): JSX.Element {
             {drawPile.length > 0 ? (
                 <div className="card faceDown"></div>
             ) : (
-                <PlaceholderC />
+                <PlaceholderC>{numDrawPilePassesRemaining}</PlaceholderC>
             )}
         </div>
     );

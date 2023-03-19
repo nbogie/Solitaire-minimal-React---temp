@@ -7,6 +7,7 @@ export interface GameState {
     drawPile: Card[];
     discardPile: Card[];
     homePiles: Record<Suit, Card[]>;
+    numDrawPilePassesRemaining: number;
 }
 export function createInitialGameState(): GameState {
     const { columns, drawPile } = makeColumns();
@@ -16,6 +17,7 @@ export function createInitialGameState(): GameState {
         drawPile,
         discardPile: [],
         homePiles: { c: [], d: [], h: [], s: [] },
+        numDrawPilePassesRemaining: 2,
     };
 }
 
