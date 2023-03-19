@@ -3,8 +3,8 @@ import { allSuits, Card } from "../gameCore/card";
 import { createInitialGameState } from "../gameCore/gameState";
 import { immerReducerFunction } from "../reducer/immerReducerFunction";
 import { ColumnC } from "./ColumnC";
-import { DiscardPile } from "./DiscardPile";
-import { DrawPile } from "./DrawPile";
+import { DiscardPileC } from "./DiscardPileC";
+import { DrawPileC } from "./DrawPileC";
 import { HomePileC } from "./HomePileC";
 
 function SolitaireC() {
@@ -22,8 +22,8 @@ function SolitaireC() {
             <h1>Patience / Klondike / Solitaire (React)</h1>
             <div className="cardTable">
                 <div className="drawAndDiscardPiles">
-                    <DrawPile drawPile={gs.drawPile} dispatch={dispatch} />
-                    <DiscardPile
+                    <DrawPileC drawPile={gs.drawPile} dispatch={dispatch} />
+                    <DiscardPileC
                         discardPile={gs.discardPile}
                         dispatch={dispatch}
                     />

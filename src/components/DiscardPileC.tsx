@@ -8,7 +8,7 @@ interface DiscardPileCProps {
     dispatch: Dispatch<Action>;
     discardPile: Card[];
 }
-export function DiscardPile({
+export function DiscardPileC({
     dispatch,
     discardPile,
 }: DiscardPileCProps): JSX.Element {

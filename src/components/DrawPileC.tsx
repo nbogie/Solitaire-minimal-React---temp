@@ -7,7 +7,7 @@ interface DrawPileCProps {
     dispatch: Dispatch<Action>;
     drawPile: Card[];
 }
-export function DrawPile({ dispatch, drawPile }: DrawPileCProps): JSX.Element {
+export function DrawPileC({ dispatch, drawPile }: DrawPileCProps): JSX.Element {
     return (
         <div
             className="drawPile"
