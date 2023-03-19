@@ -26,6 +26,17 @@ h1 {
     border-radius: 0.5rem;
 }
 
+.homePiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: gainsboro;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 0.5rem;
+}
+
 .column {
     padding: 0 20px;
     display: flex;
@@ -56,6 +67,11 @@ h1 {
     border: 3px dashed #afb3ff;
     background: none;
     box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
 }
 
 .card:not(:first-child) {

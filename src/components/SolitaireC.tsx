@@ -1,10 +1,11 @@
 import { useImmerReducer } from "use-immer";
-import { Card } from "../gameCore/card";
+import { allSuits, Card } from "../gameCore/card";
 import { createInitialGameState } from "../gameCore/gameState";
 import { immerReducerFunction } from "../reducer/immerReducerFunction";
 import { ColumnC } from "./ColumnC";
 import { DiscardPile } from "./DiscardPile";
 import { DrawPile } from "./DrawPile";
+import { HomePileC } from "./HomePileC";
 
 function SolitaireC() {
     const [gs, dispatch] = useImmerReducer(
@@ -38,6 +39,16 @@ function SolitaireC() {
                         key={ix}
                     />
                 ))}
+                <div className="homePiles">
+                    {allSuits.map((suit, ix) => (
+                        <HomePileC
+                            key={suit}
+                            homePile={gs.homePiles[suit]}
+                            suit={suit}
+                            dispatch={dispatch}
+                        />
+                    ))}
+                </div>
             </div>
 
             <h3>Messages:</h3>
