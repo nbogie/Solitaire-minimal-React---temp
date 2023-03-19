@@ -17,7 +17,6 @@ export function doMoveCardToHomePile(
     }
 
     if (action.origin.name === "column") {
-        //should only be able to drag ONE card to home pile at a time
         if (!isAtFrontOfAColumn(action.card, gs.columns)) {
             return;
         }
