@@ -1,6 +1,9 @@
 import { useImmerReducer } from "use-immer";
 import { allSuits, Card } from "../gameCore/card";
-import { createInitialGameState } from "../gameCore/gameState";
+import {
+    calculateWinState,
+    createInitialGameState,
+} from "../gameCore/gameState";
 import { immerReducerFunction } from "../reducer/immerReducerFunction";
 import { ColumnC } from "./ColumnC";
 import { DiscardPileC } from "./DiscardPileC";
@@ -18,7 +21,7 @@ function SolitaireC() {
     }
 
     return (
-        <div>
+        <div className="game">
             <h1>Patience / Klondike / Solitaire (React)</h1>
             <div className="cardTable">
                 <div className="drawAndDiscardPiles">
@@ -56,6 +59,10 @@ function SolitaireC() {
                     ))}
                 </div>
             </div>
+
+            {calculateWinState(gs) === "win" && (
+                <div className="gameOver">You Win!</div>
+            )}
         </div>
     );
 }

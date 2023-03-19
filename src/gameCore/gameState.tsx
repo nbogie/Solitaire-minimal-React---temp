@@ -37,3 +37,13 @@ export function findCardInColumns(card: Card, gs: GameState): Card {
 export function isAtFrontOfAColumn(c: Card, columns: Column[]): boolean {
     return columns.some((col) => col.length > 0 && col.at(-1)?.id === c.id);
 }
+export type WinState = "win" | "in-progress";
+
+export function calculateWinState(gs: GameState): WinState {
+    return gs.homePiles.c.length === 13 &&
+        gs.homePiles.d.length === 13 &&
+        gs.homePiles.h.length === 13 &&
+        gs.homePiles.s.length === 13
+        ? "win"
+        : "in-progress";
+}
