@@ -12,13 +12,20 @@ import {
     Suit,
     suitFullName,
 } from "../gameCore/card";
-import { Action } from "../reducer/action";
+import { Action, CardMoveOrigin } from "../reducer/action";
 
+export interface DnDCardItem {
+    card: Card;
+    origin: CardMoveOrigin;
+}
 interface CardCProps {
     card: Card;
     handleClickedCard: (card: Card) => void;
     handleClickedFaceDownCard: (card: Card) => void;
+    cardOrigin: CardMoveOrigin;
     dispatch: Dispatch<Action>;
+    isDragOrigin: boolean;
+    isDropTarget: boolean;
 }
 
 export function CardC({
@@ -26,13 +33,16 @@ export function CardC({
     handleClickedCard,
     handleClickedFaceDownCard,
     dispatch,
+    cardOrigin,
+    isDragOrigin,
+    isDropTarget,
 }: CardCProps) {
     const r = card.rank;
     const s = card.suit;
 
     const [, dragRef] = useDrag({
         type: "card",
-        item: card,
+        item: { card, origin: cardOrigin },
         collect: (monitor) => ({
             // myProp: monitor.isDragging(),
         }),
@@ -40,14 +50,15 @@ export function CardC({
 
     const [, dropRef] = useDrop({
         accept: "card",
-        canDrop: (item: Card) => {
-            return canPlaceOn(card, item);
+        canDrop: (item: DnDCardItem) => {
+            return canPlaceOn(card, item.card);
         },
-        drop: (item: Card) => {
+        drop: (item: DnDCardItem) => {
             dispatch({
                 name: "move-cards",
                 destCard: card,
-                topCard: item,
+                topCard: item.card,
+                origin: item.origin,
             });
         },
     });
@@ -62,8 +73,8 @@ export function CardC({
         }
     }
     function attachRef(element: ConnectableElement) {
-        dragRef(element);
-        dropRef(element);
+        isDragOrigin && dragRef(element);
+        isDropTarget && dropRef(element);
     }
 
     if (card.isFaceup) {

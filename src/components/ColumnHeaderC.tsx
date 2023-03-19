@@ -1,8 +1,9 @@
 import { Dispatch } from "react";
 import { useDrop } from "react-dnd";
-import { Card } from "../gameCore/card";
 import { canMoveCardsToTopOfColumn, Column } from "../gameCore/deck";
 import { Action } from "../reducer/action";
+import { DnDCardItem } from "./CardC";
+import { PlaceholderC } from "./PlaceholderC";
 
 interface ColumnHeaderCProps {
     col: Column;
@@ -18,14 +19,15 @@ export function ColumnHeaderC({
 }: ColumnHeaderCProps) {
     const [, dropRef] = useDrop({
         accept: "card",
-        canDrop: (item: Card) => {
-            return canMoveCardsToTopOfColumn(item, col);
+        canDrop: (item: DnDCardItem) => {
+            return canMoveCardsToTopOfColumn(item.card, col);
         },
-        drop: (item: Card) => {
+        drop: (item: DnDCardItem) => {
             dispatch({
                 name: "move-cards-to-empty-column",
                 columnIx: ix,
-                topCard: item,
+                topCard: item.card,
+                origin: item.origin,
             });
         },
     });
@@ -41,8 +43,4 @@ export function ColumnHeaderC({
             {col.length === 0 ? <PlaceholderC /> : null}
         </div>
     );
-}
-
-function PlaceholderC() {
-    return <div className="cardPlaceholder"></div>;
 }

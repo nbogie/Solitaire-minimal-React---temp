@@ -22,18 +22,18 @@ export function shuffle<T>(arr: T[]): T[] {
     return [...arr].sort(() => (Math.random() > 0.5 ? -1 : 1));
 }
 
-export function makeColumns() {
-    const cols: Column[] = [[], [], [], [], [], [], []];
+export function makeColumns(): { columns: Column[]; drawPile: Card[] } {
+    const columns: Column[] = [[], [], [], [], [], [], []];
     const deck = makeDeck();
     for (let row = 0; row < 7; row++) {
         for (let colIx = 0; colIx < row + 1; colIx++) {
             const card: Card = deck.pop()!;
-            cols[colIx].push(card);
+            columns[colIx].push(card);
         }
     }
-    cols.reverse();
-    cols.forEach(flipLastCard);
-    return cols;
+    columns.reverse();
+    columns.forEach(flipLastCard);
+    return { columns, drawPile: deck };
 }
 
 function flipLastCard(cards: Card[]) {

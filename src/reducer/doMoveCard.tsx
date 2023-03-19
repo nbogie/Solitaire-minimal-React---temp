@@ -23,7 +23,11 @@ export function doMoveCard(gs: GameState, action: MoveCardsAction) {
     }
 
     if (canPlaceOn(destCard, topCard)) {
-        const removedCards = removeCardsIncludingAndUnder(gs, topCard);
+        const removedCards =
+            action.origin.name === "column"
+                ? removeCardsIncludingAndUnder(gs, topCard)
+                : [gs.discardPile.pop()!];
+
         columnEndingWithDestCard.push(...removedCards);
         gs.selectedCard = null;
         return;

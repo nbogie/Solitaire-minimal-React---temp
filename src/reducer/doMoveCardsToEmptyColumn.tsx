@@ -11,7 +11,12 @@ export function doMoveCardsToEmptyColumn(
     if (!canMoveCardsToTopOfColumn(action.topCard, col)) {
         return;
     }
-    const cardsBeingMoved = removeCardsIncludingAndUnder(gs, action.topCard);
+
+    const cardsBeingMoved =
+        action.origin.name === "column"
+            ? removeCardsIncludingAndUnder(gs, action.topCard)
+            : [gs.discardPile.pop()!];
+
     col.push(...cardsBeingMoved);
     gs.selectedCard = null;
 }

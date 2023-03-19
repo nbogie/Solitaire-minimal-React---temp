@@ -1,6 +1,7 @@
 import { GameState } from "../gameCore/gameState";
 import { Action } from "./action";
 import { doClearSelectedCard } from "./doClearSelectedCard";
+import { doDrawCard } from "./doDrawCard";
 import { doMoveCard as doMoveCards } from "./doMoveCard";
 import { doMoveCardsToEmptyColumn } from "./doMoveCardsToEmptyColumn";
 import { doRevealCard } from "./doRevealCard";
@@ -22,6 +23,9 @@ export function immerReducerFunction(gs: GameState, action: Action) {
             return;
         case "clear-selected-card":
             doClearSelectedCard(gs, action);
+            return;
+        case "draw-card":
+            doDrawCard(gs, action);
             return;
         case "reset-game":
             throw new Error("not implemented: reset-game");

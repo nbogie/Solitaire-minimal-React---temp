@@ -15,8 +15,19 @@ h1 {
     justify-content: center;
 }
 
+.drawAndDiscardPiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: gainsboro;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 0.5rem;
+}
+
 .column {
-    padding: 20px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
 }

@@ -41,6 +41,9 @@ export function ColumnC({
                             }
                         }}
                         dispatch={dispatch}
+                        cardOrigin={{ name: "column" }}
+                        isDragOrigin={true}
+                        isDropTarget={true}
                     />
                 ))}
             </div>
