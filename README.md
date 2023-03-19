@@ -1,8 +1,10 @@
 # Solitaire mechanism basic (React)
 
-Testing the academy vite react starter template
+A rough implementation of Solitaire / Klondike / Patience card game in React, using react-dnd for drag-and-drop.
 
-From 25th Feb 2023 (so no advanced linting or prettier, but tests and basic lint)
+Desktop only.
+
+Testing the academy vite react starter template. No advanced linting, but tests and basic lint.
 
 ## TO-DO list
 
@@ -13,9 +15,3 @@ From 25th Feb 2023 (so no advanced linting or prettier, but tests and basic lint
 -   add shuffle animation
 -   show discard cards as trio
 -   css: layout the symbols identically regardless of width of number
-
-## done
-
--   do card-draw and re-shuffle the right way
--   show 10 as 10 not T
--   detect game over (win)
