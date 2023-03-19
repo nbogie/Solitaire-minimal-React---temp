@@ -9,7 +9,6 @@ export function doDrawCard(gs: GameState, action: DrawCardAction) {
     gs.discardPile.push(...drawnCards);
 
     if (gs.drawPile.length === 0) {
-        console.log("draw pile empty: prepping");
         if (gs.numDrawPilePassesRemaining > 0) {
             gs.numDrawPilePassesRemaining--;
             gs.drawPile = gs.discardPile;
@@ -17,7 +16,5 @@ export function doDrawCard(gs: GameState, action: DrawCardAction) {
             gs.drawPile.forEach((c) => (c.isFaceup = false));
             gs.discardPile = [];
         }
-    } else {
-        console.log("draw pile not empty");
     }
 }

@@ -7,7 +7,6 @@ export function doMoveCardToHomePile(
     gs: GameState,
     action: MoveCardToHomePileAction
 ) {
-    console.log("do move card to home pile", action);
     const cardsInPile = gs.homePiles[action.suit];
 
     if (action.card.suit !== action.suit) {
