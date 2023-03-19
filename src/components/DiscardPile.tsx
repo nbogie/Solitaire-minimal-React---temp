@@ -13,23 +13,12 @@ export function DiscardPile({
     discardPile,
 }: DiscardPileCProps): JSX.Element {
     return (
-        <div
-            className="DiscardPile"
-            onClick={() =>
-                discardPile.length === 0
-                    ? () => {}
-                    : dispatch({
-                          name: "select-card",
-                          card: discardPile[discardPile.length - 1],
-                      })
-            }
-        >
+        <div className="DiscardPile">
             {discardPile.length > 0 ? (
                 <CardC
                     {...{
                         card: discardPile.at(-1)!,
                         dispatch,
-                        handleClickedCard: () => {},
                         handleClickedFaceDownCard: () => {},
                         cardOrigin: { name: "discard-pile" },
                         isDragOrigin: true,

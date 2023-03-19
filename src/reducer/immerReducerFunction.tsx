@@ -1,11 +1,9 @@
 import { GameState } from "../gameCore/gameState";
 import { Action } from "./action";
-import { doClearSelectedCard } from "./doClearSelectedCard";
 import { doDrawCard } from "./doDrawCard";
 import { doMoveCard as doMoveCards } from "./doMoveCard";
 import { doMoveCardsToEmptyColumn } from "./doMoveCardsToEmptyColumn";
 import { doRevealCard } from "./doRevealCard";
-import { doSelectCard } from "./doSelectCard";
 
 export function immerReducerFunction(gs: GameState, action: Action) {
     switch (action.name) {
@@ -17,12 +15,6 @@ export function immerReducerFunction(gs: GameState, action: Action) {
             return;
         case "reveal-card":
             doRevealCard(gs, action);
-            return;
-        case "select-card":
-            doSelectCard(gs, action);
-            return;
-        case "clear-selected-card":
-            doClearSelectedCard(gs, action);
             return;
         case "draw-card":
             doDrawCard(gs, action);

@@ -18,5 +18,4 @@ export function doMoveCardsToEmptyColumn(
             : [gs.discardPile.pop()!];
 
     col.push(...cardsBeingMoved);
-    gs.selectedCard = null;
 }

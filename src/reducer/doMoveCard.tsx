@@ -7,7 +7,6 @@ export function doMoveCard(gs: GameState, action: MoveCardsAction) {
     const { destCard, topCard } = action;
     if (destCard.id === topCard.id) {
         gs.logMessages.push("Can't place on self!");
-        gs.selectedCard = null;
         return;
     }
     const columnEndingWithDestCard = gs.columns.find(
@@ -18,7 +17,6 @@ export function doMoveCard(gs: GameState, action: MoveCardsAction) {
         gs.logMessages.push(
             "Can't place on non-end card: " + cardToString(destCard)
         );
-        gs.selectedCard = null;
         return;
     }
 
@@ -29,13 +27,11 @@ export function doMoveCard(gs: GameState, action: MoveCardsAction) {
                 : [gs.discardPile.pop()!];
 
         columnEndingWithDestCard.push(...removedCards);
-        gs.selectedCard = null;
         return;
     } else {
         gs.logMessages.push(
             `Can't place ${cardToString(topCard)} on ${cardToString(destCard)}`
         );
-        gs.selectedCard = null;
         return;
     }
 }

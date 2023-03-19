@@ -20,7 +20,6 @@ export interface DnDCardItem {
 }
 interface CardCProps {
     card: Card;
-    handleClickedCard: (card: Card) => void;
     handleClickedFaceDownCard: (card: Card) => void;
     cardOrigin: CardMoveOrigin;
     dispatch: Dispatch<Action>;
@@ -30,7 +29,6 @@ interface CardCProps {
 
 export function CardC({
     card,
-    handleClickedCard,
     handleClickedFaceDownCard,
     dispatch,
     cardOrigin,
@@ -79,11 +77,7 @@ export function CardC({
 
     if (card.isFaceup) {
         return (
-            <div
-                ref={attachRef}
-                className={"card " + s}
-                onClick={() => handleClickedCard(card)}
-            >
+            <div ref={attachRef} className={"card " + s}>
                 {
                     <div
                         title={`${rankToWord(r)} of ${suitFullName(

@@ -3,7 +3,6 @@ import { Column, makeColumns } from "./deck";
 
 export interface GameState {
     logMessages: string[];
-    selectedCard: Card | null;
     columns: Column[];
     drawPile: Card[];
     discardPile: Card[];
@@ -13,7 +12,6 @@ export function createInitialGameState(): GameState {
     const { columns, drawPile } = makeColumns();
     return {
         logMessages: [],
-        selectedCard: null,
         columns,
         drawPile,
         discardPile: [],

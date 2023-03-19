@@ -7,16 +7,10 @@ import { PlaceholderC } from "./PlaceholderC";
 
 interface ColumnHeaderCProps {
     col: Column;
-    handleClickedEmptyColumn: (colIx: number) => void;
     ix: number;
     dispatch: Dispatch<Action>;
 }
-export function ColumnHeaderC({
-    col,
-    ix,
-    handleClickedEmptyColumn,
-    dispatch,
-}: ColumnHeaderCProps) {
+export function ColumnHeaderC({ col, ix, dispatch }: ColumnHeaderCProps) {
     const [, dropRef] = useDrop({
         accept: "card",
         canDrop: (item: DnDCardItem) => {
@@ -33,13 +27,7 @@ export function ColumnHeaderC({
     });
 
     return (
-        <div
-            ref={dropRef}
-            className="columnHeader"
-            onClick={
-                col.length === 0 ? () => handleClickedEmptyColumn(ix) : () => {}
-            }
-        >
+        <div ref={dropRef} className="columnHeader">
             {col.length === 0 ? <PlaceholderC /> : null}
         </div>
     );

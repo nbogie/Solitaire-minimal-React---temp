@@ -9,32 +9,22 @@ interface ColumnCProps {
     col: Column;
     ix: number;
     dispatch: Dispatch<Action>;
-    handleClickedEmptyColumn: (columnIx: number) => void;
-    handleClickedCard: (card: Card) => void;
     handleClickedFaceDownCard: (card: Card) => void;
 }
 export function ColumnC({
     col,
     ix,
     dispatch,
-    handleClickedEmptyColumn,
-    handleClickedCard,
     handleClickedFaceDownCard,
 }: ColumnCProps): JSX.Element {
     return (
         <div className="column" key={ix}>
-            <ColumnHeaderC
-                col={col}
-                ix={ix}
-                handleClickedEmptyColumn={handleClickedEmptyColumn}
-                dispatch={dispatch}
-            />
+            <ColumnHeaderC col={col} ix={ix} dispatch={dispatch} />
             <div className="cardList">
                 {col.map((card, ixc) => (
                     <CardC
                         card={card}
                         key={ixc}
-                        handleClickedCard={handleClickedCard}
                         handleClickedFaceDownCard={() => {
                             if (ixc === col.length - 1) {
                                 handleClickedFaceDownCard(card);
