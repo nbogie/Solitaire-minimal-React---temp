@@ -1,4 +1,4 @@
-import { canPlaceOn, cardToString } from "../gameCore/card";
+import { canPlaceOn } from "../gameCore/card";
 import { GameState } from "../gameCore/gameState";
 import { MoveCardsAction } from "./action";
 import { removeCardsIncludingAndUnder } from "./removeCardsIncludingAndUnder";
@@ -6,7 +6,6 @@ import { removeCardsIncludingAndUnder } from "./removeCardsIncludingAndUnder";
 export function doMoveCards(gs: GameState, action: MoveCardsAction) {
     const { destCard, topCard } = action;
     if (destCard.id === topCard.id) {
-        gs.logMessages.push("Can't place on self!");
         return;
     }
     const columnEndingWithDestCard = gs.columns.find(
@@ -14,9 +13,6 @@ export function doMoveCards(gs: GameState, action: MoveCardsAction) {
     );
 
     if (!columnEndingWithDestCard) {
-        gs.logMessages.push(
-            "Can't place on non-end card: " + cardToString(destCard)
-        );
         return;
     }
 
@@ -29,9 +25,6 @@ export function doMoveCards(gs: GameState, action: MoveCardsAction) {
         columnEndingWithDestCard.push(...removedCards);
         return;
     } else {
-        gs.logMessages.push(
-            `Can't place ${cardToString(topCard)} on ${cardToString(destCard)}`
-        );
         return;
     }
 }

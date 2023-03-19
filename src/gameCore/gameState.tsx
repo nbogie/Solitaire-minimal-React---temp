@@ -2,7 +2,6 @@ import { Card, Suit } from "./card";
 import { Column, makeColumns } from "./deck";
 
 export interface GameState {
-    logMessages: string[];
     columns: Column[];
     drawPile: Card[];
     discardPile: Card[];
@@ -12,7 +11,6 @@ export interface GameState {
 export function createInitialGameState(): GameState {
     const { columns, drawPile } = makeColumns();
     return {
-        logMessages: [],
         columns,
         drawPile,
         discardPile: [],

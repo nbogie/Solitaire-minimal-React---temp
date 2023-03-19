@@ -56,11 +56,6 @@ function SolitaireC() {
                     ))}
                 </div>
             </div>
-
-            <h3>Messages:</h3>
-            {[...gs.logMessages].reverse().map((m, ix) => (
-                <p key={ix}>{m}</p>
-            ))}
         </div>
     );
 }
