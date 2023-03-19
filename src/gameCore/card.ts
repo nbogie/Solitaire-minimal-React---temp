@@ -66,8 +66,10 @@ export function differentColourSuits(a: Suit, b: Suit): boolean {
     return s1 !== s2;
 }
 
-export function rankToCharacter(rank: number): string {
-    return "A23456789TJQK".split("")[rank - 1];
+export function rankToString(rank: number): string {
+    return ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"][
+        rank - 1
+    ];
 }
 
 export function rankToWord(rank: number): string {

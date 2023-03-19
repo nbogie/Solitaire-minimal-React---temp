@@ -7,7 +7,7 @@ import {
     higherRank,
     otherSuitColour,
     Rank,
-    rankToCharacter,
+    rankToString,
     rankToWord,
     Suit,
     suitFullName,
@@ -84,7 +84,7 @@ export function CardC({
                             s
                         )}.${placementAdvice(r, s)}`}
                     >
-                        {rankToCharacter(r)} {emojiForSuit(s)}
+                        {rankToString(r)} {emojiForSuit(s)}
                     </div>
                 }
             </div>

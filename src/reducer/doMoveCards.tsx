@@ -3,7 +3,7 @@ import { GameState } from "../gameCore/gameState";
 import { MoveCardsAction } from "./action";
 import { removeCardsIncludingAndUnder } from "./removeCardsIncludingAndUnder";
 
-export function doMoveCard(gs: GameState, action: MoveCardsAction) {
+export function doMoveCards(gs: GameState, action: MoveCardsAction) {
     const { destCard, topCard } = action;
     if (destCard.id === topCard.id) {
         gs.logMessages.push("Can't place on self!");

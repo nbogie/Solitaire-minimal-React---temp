@@ -1,7 +1,7 @@
 import { GameState } from "../gameCore/gameState";
 import { Action } from "./action";
 import { doDrawCard } from "./doDrawCard";
-import { doMoveCard as doMoveCards } from "./doMoveCard";
+import { doMoveCards } from "./doMoveCards";
 import { doMoveCardsToEmptyColumn } from "./doMoveCardsToEmptyColumn";
 import { doMoveCardToHomePile } from "./doMoveCardToHomePile";
 import { doRevealCard } from "./doRevealCard";
