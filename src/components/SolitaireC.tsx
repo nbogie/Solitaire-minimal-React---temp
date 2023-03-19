@@ -43,7 +43,7 @@ function SolitaireC() {
                     {allSuits.map((suit, ix) => (
                         <HomePileC
                             key={suit}
-                            homePile={gs.homePiles[suit]}
+                            cardsInPile={gs.homePiles[suit]}
                             suit={suit}
                             dispatch={dispatch}
                         />

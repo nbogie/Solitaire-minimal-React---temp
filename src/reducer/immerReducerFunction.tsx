@@ -3,6 +3,7 @@ import { Action } from "./action";
 import { doDrawCard } from "./doDrawCard";
 import { doMoveCard as doMoveCards } from "./doMoveCard";
 import { doMoveCardsToEmptyColumn } from "./doMoveCardsToEmptyColumn";
+import { doMoveCardToHomePile } from "./doMoveCardToHomePile";
 import { doRevealCard } from "./doRevealCard";
 
 export function immerReducerFunction(gs: GameState, action: Action) {
@@ -12,6 +13,9 @@ export function immerReducerFunction(gs: GameState, action: Action) {
             return;
         case "move-cards-to-empty-column":
             doMoveCardsToEmptyColumn(gs, action);
+            return;
+        case "move-card-to-home-pile":
+            doMoveCardToHomePile(gs, action);
             return;
         case "reveal-card":
             doRevealCard(gs, action);

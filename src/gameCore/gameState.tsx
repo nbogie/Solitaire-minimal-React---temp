@@ -33,3 +33,7 @@ export function findCardInColumns(card: Card, gs: GameState): Card {
             JSON.stringify(gs.columns)
     );
 }
+
+export function isAtFrontOfAColumn(c: Card, columns: Column[]): boolean {
+    return columns.some((col) => col.length > 0 && col.at(-1)?.id === c.id);
+}

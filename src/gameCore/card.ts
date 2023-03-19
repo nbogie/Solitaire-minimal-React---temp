@@ -80,3 +80,10 @@ export function canPlaceOn(baseCard: Card, nextCard: Card) {
         differentColourSuits(baseCard.suit, nextCard.suit)
     );
 }
+
+export function cardGoesNextOnPile(candidateCard: Card, cardsInPile: Card[]) {
+    if (cardsInPile.length === 0) {
+        return candidateCard.rank === 1;
+    }
+    return cardsInPile.at(-1)!.rank === candidateCard.rank - 1;
+}

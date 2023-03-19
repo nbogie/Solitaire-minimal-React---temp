@@ -1,9 +1,10 @@
-import { Card } from "../gameCore/card";
+import { Card, Suit } from "../gameCore/card";
 
 export type Action =
     | DrawCardAction
     | MoveCardsAction
     | MoveCardsToEmptyColumnAction
+    | MoveCardToHomePileAction
     | ResetGameAction
     | RevealCardAction;
 
@@ -27,3 +28,10 @@ export type RevealCardAction = {
 };
 export type ResetGameAction = { name: "reset-game" };
 export type DrawCardAction = { name: "draw-card" };
+
+export type MoveCardToHomePileAction = {
+    name: "move-card-to-home-pile";
+    card: Card;
+    origin: CardMoveOrigin;
+    suit: Suit;
+};
