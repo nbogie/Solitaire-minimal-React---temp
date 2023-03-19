@@ -12,12 +12,14 @@ export function DiscardPileC({
     dispatch,
     discardPile,
 }: DiscardPileCProps): JSX.Element {
+    const topCard = discardPile.at(-1);
+
     return (
         <div className="DiscardPile">
-            {discardPile.length > 0 ? (
+            {topCard ? (
                 <CardC
                     {...{
-                        card: discardPile.at(-1)!,
+                        card: topCard,
                         dispatch,
                         handleClickedFaceDownCard: () => {},
                         cardOrigin: { name: "discard-pile" },
