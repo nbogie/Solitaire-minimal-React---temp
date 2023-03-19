@@ -1,10 +1,12 @@
-# Solitaire mechanism basic (React)
+# Solitaire / Klondike / Patience (React)
 
-A rough implementation of Solitaire / Klondike / Patience card game in React, using react-dnd for drag-and-drop.
+A rough implementation of Solitaire / Klondike / Patience card game in React and TypeScript, using react-dnd for drag-and-drop.
 
 Desktop only.
+No animations.
+No sounds.
 
-Testing the academy vite react starter template. No advanced linting, but tests and basic lint.
+Testing the academy vite react starter template: No advanced linting, but tests and basic lint.
 
 ## TO-DO list
 
