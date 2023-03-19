@@ -1,7 +1,7 @@
 import SolitaireC from "./SolitaireC";
 import "../style.css";
 
-function App() {
+function AppC() {
     return (
         <div className="App">
             <SolitaireC />
@@ -9,4 +9,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppC;
